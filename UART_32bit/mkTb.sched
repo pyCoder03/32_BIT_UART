@@ -1,0 +1,19 @@
+=== Generated schedule for mkTb ===
+
+Rule schedule
+-------------
+Rule: update_cnt
+Predicate: True
+Blocking rules: (none)
+ 
+Rule: transmit_uart
+Predicate: uut.RDY_par_in && uut.RDY_start_tx
+Blocking rules: (none)
+ 
+Rule: get_output
+Predicate: True
+Blocking rules: (none)
+ 
+Logical execution order: get_output, transmit_uart, update_cnt
+
+====================================

@@ -1,0 +1,47 @@
+=== Generated schedule for mkUART_32bit ===
+
+Method schedule
+---------------
+Method: par_in
+Ready signal: ! tx
+Conflict-free: uart32bit_tx
+Sequenced before (restricted): par_in
+Conflicts: start_tx
+ 
+Method: start_tx
+Ready signal: ! tx
+Sequenced after: uart32bit_tx
+Conflicts: par_in, start_tx
+ 
+Method: uart32bit_tx
+Ready signal: True
+Conflict-free: par_in, uart32bit_tx
+Sequenced before: start_tx
+ 
+Rule schedule
+-------------
+Rule: tx_8bit
+Predicate: tx_frag.whas && tx_frag.wget
+Blocking rules: par_in
+ 
+Rule: update_sbuf
+Predicate: tx_frag.whas && tx_frag.wget
+Blocking rules: (none)
+ 
+Rule: update_cnt
+Predicate: tx
+Blocking rules: (none)
+ 
+Rule: shift_out
+Predicate: tx
+Blocking rules: (none)
+ 
+Logical execution order: par_in,
+			 uart32bit_tx,
+			 start_tx,
+			 shift_out,
+			 tx_8bit,
+			 update_sbuf,
+			 update_cnt
+
+============================================
