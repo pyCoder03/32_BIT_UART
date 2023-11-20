@@ -1,0 +1,29 @@
+=== Generated schedule for mkUART ===
+
+Method schedule
+---------------
+Method: par_in
+Ready signal: ! tx
+Conflict-free: uart_tx
+Sequenced before: start_tx
+Sequenced before (restricted): par_in
+ 
+Method: start_tx
+Ready signal: ! tx
+Sequenced after: par_in, uart_tx
+Conflicts: start_tx
+ 
+Method: uart_tx
+Ready signal: True
+Conflict-free: par_in, uart_tx
+Sequenced before: start_tx
+ 
+Rule schedule
+-------------
+Rule: shift_out
+Predicate: tx
+Blocking rules: (none)
+ 
+Logical execution order: par_in, uart_tx, start_tx, shift_out
+
+======================================
